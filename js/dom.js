@@ -24,7 +24,10 @@ function makeTodo(data, timestamp, isCompleted) {
   container.classList.add("item", "shadow");
   container.append(textContainer);
   if(isCompleted){
-    container.append(createTrashButton());
+    container.append(
+      createTrashButton(),
+      createUndoButton()
+    );
   } else {
     container.append(createCheckButton());
   }
@@ -51,6 +54,12 @@ function createCheckButton() {
 function createTrashButton() {
   return createButton("trash-button", function(event) {
     removeTaskFromCompleted(event.target.parentElement);
+  });
+}
+
+function createUndoButton() {
+  return createButton("undo-button", function(event){
+    undoTaskFromCompleted(event.target.parentElement);
   });
 }
 
