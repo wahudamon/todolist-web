@@ -45,5 +45,10 @@ function createCheckButton() {
 }
 
 function addTaskToCompleted(taskElement) {
+  const taskTitle = taskElement.querySelector(".inner > h2").innerText;
+  const taskTimestamp = taskElement.querySelector(".inner > p").innerText;
+  const newTodo = makeTodo(taskTitle, taskTimestamp);
+  const listCompleted = document.getElementById(COMPLETED_LIST_TODO_ID);
+  listCompleted.append(newTodo);
   taskElement.remove();
 }
