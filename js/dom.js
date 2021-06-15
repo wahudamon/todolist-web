@@ -12,7 +12,7 @@ function addTodo() {
   }
 }
 
-function makeTodo(data, timestamp) {
+function makeTodo(data, timestamp, isCompleted) {
   const textTitle = document.createElement("h2");
   textTitle.innerText = data;
   const textTimestamp = document.createElement("p");
@@ -23,7 +23,11 @@ function makeTodo(data, timestamp) {
   const container = document.createElement("div");
   container.classList.add("item", "shadow");
   container.append(textContainer);
-  container.append(createCheckButton());
+  if(isCompleted){
+    container.append(createTrashButton());
+  } else {
+    container.append(createCheckButton());
+  }
 
   return container;
 }
@@ -44,11 +48,25 @@ function createCheckButton() {
   });
 }
 
+function createTrashButton() {
+  return createButton("trash-button", function(event) {
+    removeTaskFromCompleted(event.target.parentElement);
+  });
+}
+
 function addTaskToCompleted(taskElement) {
   const taskTitle = taskElement.querySelector(".inner > h2").innerText;
   const taskTimestamp = taskElement.querySelector(".inner > p").innerText;
-  const newTodo = makeTodo(taskTitle, taskTimestamp);
+  const newTodo = makeTodo(taskTitle, taskTimestamp, true);
   const listCompleted = document.getElementById(COMPLETED_LIST_TODO_ID);
   listCompleted.append(newTodo);
+  taskElement.remove();
+}
+
+function undoTaskFromCompleted(taskElement) {
+  const newTodo = makeTodo(taskTitle, taskTimestamp, false);
+}
+
+function removeTaskFromCompleted(taskElement) {
   taskElement.remove();
 }
