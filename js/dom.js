@@ -64,7 +64,14 @@ function addTaskToCompleted(taskElement) {
 }
 
 function undoTaskFromCompleted(taskElement) {
+  const listUncompleted = document.getElementById(UNCOMPLETED_LIST_TODO_ID);
+  const taskTitle = taskElement.querySelector(".inner > h2").innerText;
+  const taskTimestamp = taskElement.querySelector(".inner > p").innerText;
+
   const newTodo = makeTodo(taskTitle, taskTimestamp, false);
+
+  listUncompleted.append(newTodo);
+  taskElement.remove();
 }
 
 function removeTaskFromCompleted(taskElement) {
