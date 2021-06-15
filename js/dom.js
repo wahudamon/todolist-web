@@ -25,3 +25,13 @@ function makeTodo(data, timestamp) {
 
   return container;
 }
+
+function createButton(buttonTypeClass, eventListener) {
+  const button = document.createElement("button");
+  button.classList.add(buttonTypeClass);
+  button.addEventListener("click", function(event) {
+    eventListener(event);
+  });
+
+  return button;
+}
