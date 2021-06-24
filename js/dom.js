@@ -98,5 +98,9 @@ function undoTaskFromCompleted(taskElement) {
 }
 
 function removeTaskFromCompleted(taskElement) {
+  const todoPosition = findTodoIndex(taskElement[TODO_ITEMID]);
+  todos.splice(todoPosition, 1);
+
   taskElement.remove();
+  updateDataToStorage();
 }
