@@ -1,5 +1,6 @@
 const UNCOMPLETED_LIST_TODO_ID = "todos";
 const COMPLETED_LIST_TODO_ID = "completed-todos";
+const TODO_ITEMID = "itemId";
 
 function addTodo() {
   const uncompletedTODOList = document.getElementById(UNCOMPLETED_LIST_TODO_ID);
@@ -8,7 +9,13 @@ function addTodo() {
 
   for(let i = 0; i < 1; i++) {
     const todo = makeTodo(textTodo, timestamp);
+    const todoObject = composeTodoObject(textTodo, timestamp, false);
+
+    todo[TODO_ITEMID] = todoObject.id;
+    todos.push(todoObject);
+
     uncompletedTODOList.append(todo);
+    updateDataToStorage();
   }
 }
 
